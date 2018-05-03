@@ -1,4 +1,6 @@
 import * as types from '../constants/actionTypes';
+// import firebase from 'firebase';
+// import { withFirebase } from "react-redux-firebase";
 
 export function setUserName(settings, name) {
   return {
@@ -7,4 +9,4 @@ export function setUserName(settings, name) {
     userDescription: "Is very cool",
     settings
   };
-}
+};

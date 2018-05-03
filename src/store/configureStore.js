@@ -4,9 +4,34 @@ import thunk from "redux-thunk";
 import createHistory from "history/createBrowserHistory";
 // 'routerMiddleware': the new way of storing route changes with redux middleware since rrV4.
 import { routerMiddleware } from "react-router-redux";
+
+import firebase from 'firebase';
+import { reactReduxFirebase, firebaseReducer } from "react-redux-firebase";
+
 import rootReducer from "../reducers";
 
+
 export const history = createHistory();
+
+//FIREBASE THINGS
+
+const firebaseConfig = {
+  apiKey: "AIzaSyD4jyOvcdbM12Xjdoyh2UCoVyGk9yIXT2c",
+  authDomain: "syllabi-7f3d5.firebaseapp.com",
+  databaseURL: "https://syllabi-7f3d5.firebaseio.com",
+  projectId: "syllabi-7f3d5",
+  storageBucket: "syllabi-7f3d5.appspot.com",
+  messagingSenderId: "148214861164"
+}
+
+//react-redux-firebase config
+const rrfConfig = {
+  userProfile: 'users',
+}
+
+// Initialize firebase instance
+firebase.initializeApp(firebaseConfig)
+
 
 /*
 
@@ -28,7 +53,11 @@ function configureStoreProd(initialState) {
   return createStore(
     rootReducer,
     initialState,
-    compose(applyMiddleware(...middlewares))
+    compose(
+      //firebase as first argument
+      reactReduxFirebase(firebase, rrfConfig),
+      applyMiddleware(...middlewares)
+    )
   );
 }
 
@@ -57,7 +86,11 @@ function configureStoreDev(initialState) {
   const store = createStore(
     rootReducer,
     initialState,
-    composeEnhancers(applyMiddleware(...middlewares))
+    composeEnhancers(
+      // firebase as first argument
+      reactReduxFirebase(firebase, rrfConfig),
+      applyMiddleware(...middlewares)
+    )
   );
 
   if (module.hot) {

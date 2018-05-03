@@ -4,12 +4,16 @@ import {connect} from 'react-redux';
 import { bindActionCreators } from "redux";
 import * as actions from '../actions/testAction';
 import UserNameForm from './UserNameForm';
+// import firebase from 'firebase';
+import { withFirebase } from "react-redux-firebase";
 
 export class HomePage extends React.Component {
+
 
   setUserName = e => {
     e.preventDefault();
     this.props.actions.setUserName(this.props.user , e.target[0].value);
+    firebase.push(e.target[0].value);
   }
 
   render() {
@@ -26,10 +30,10 @@ export class HomePage extends React.Component {
   }
 }
 
-// HomePage.propTypes = {
-//   actions: PropTypes.object.isRequired,
-//   user: PropTypes.object.isRequired
-// };
+HomePage.propTypes = {
+  actions: PropTypes.object.isRequired,
+  user: PropTypes.object.isRequired
+};
 
 function mapStateToProps(state) {
   console.log('MAPSTATE STATE', state);
@@ -46,5 +50,5 @@ function mapDispatchToProps(dispatch) {
 
 export default connect(
   mapStateToProps, 
-  mapDispatchToProps
+  mapDispatchToProps,
 )(HomePage);
