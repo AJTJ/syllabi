@@ -26,7 +26,9 @@ const firebaseConfig = {
 
 //react-redux-firebase config
 const rrfConfig = {
-  userProfile: 'users',
+  userProfile: 'users', // firebase root where user profiles are stored
+  attachAuthIsReady: true, // attaches auth is ready promise to store
+  firebaseStateName: 'firebase' // should match the reducer name ('firebase' is default)
 }
 
 // Initialize firebase instance
@@ -104,6 +106,10 @@ function configureStoreDev(initialState) {
   store.subscribe(() => {
     console.log("store changed", store.getState());
   });
+
+  store.firebaseAuthIsReady.then(() => {
+    console.log('Auth has loaded') // eslint-disable-line no-console
+  })
 
   return store;
 }

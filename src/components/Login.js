@@ -4,20 +4,26 @@ import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { firebaseConnect, isLoaded, isEmpty } from 'react-redux-firebase';
 
+const displayLogin = auth => {
+  if (!isLoaded(auth)) {
+    return <span>Still Loading...</span>;
+  } else if (isEmpty(auth)) {
+    return <span>Not Authed</span>;
+  }
+  return <pre>Welcome, {auth.displayName}!</pre>;
+};
+
 export const Login = ({ firebase, auth }) => (
+
   <div>
     <button
       onClick={() => firebase.login({ provider: 'google', type: 'popup' })}
     >Login With Google</button>
+    <button
+      onClick={() => firebase.logout() }
+    >Logout</button>
     <div>
-      <h2>Auth</h2>
-      {
-        !isLoaded(auth)
-        ? <span>Loading...</span>
-        : isEmpty(auth)
-          ? <span> Not Authed </span>
-          : <pre>{JSON.stringify(auth, null, 2)}</pre>
-      }
+      {displayLogin(auth)}
     </div>
   </div>
 )

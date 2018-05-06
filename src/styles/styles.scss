@@ -1,3 +1,11 @@
+@import 'partials/builder';
+@import 'partials/mySyllabi';
+@import 'partials/app';
+
 body {
   background: paleturquoise;
+}
+
+.builder__wrapper {
+  border: 1px, solid, black;
 }

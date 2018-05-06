@@ -1,0 +1,16 @@
+.page__wrapper {
+  margin: 0 auto;
+  max-width: 1200px;
+  // max-height: 100vh;
+  min-height: 500px;
+}
+
+.builderSyllabi__wrapper {
+  display: flex;
+  justify-content: center;
+}
+
+.savedSyllabi__wrapper {
+  border: 1px solid black;
+  width: 50%;
+}
