@@ -2,27 +2,17 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators } from "redux";
-import * as actions from '../actions/testAction';
+import * as actions from '../actions/builderAction';
 import UserNameForm from './UserNameForm';
 import firebase from 'firebase';
 import { withFirebase } from "react-redux-firebase";
 
 export class SharedSyllabi extends React.Component {
 
-
-  setUserName = e => {
-    e.preventDefault();
-    this.props.actions.setUserName(this.props.user, e.target[0].value);
-    firebase.push(e.target[0].value);
-  }
-
   render() {
     return (
       <div>
-        <h1>{this.props.user.userName}</h1>
-        <UserNameForm
-          onSubmit={this.setUserName}
-        />
+        <h1>Shared Syllabi</h1>
       </div>
     )
   }
@@ -30,13 +20,11 @@ export class SharedSyllabi extends React.Component {
 
 SharedSyllabi.propTypes = {
   actions: PropTypes.object.isRequired,
-  user: PropTypes.object.isRequired
 };
 
 function mapStateToProps(state) {
-  console.log('MAPSTATE STATE', state);
   return {
-    user: state.user,
+    publicSyllabi: state.publicSyllabi,
   };
 }
 

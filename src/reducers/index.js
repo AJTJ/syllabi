@@ -1,10 +1,10 @@
 import { combineReducers } from 'redux';
 import { routerReducer } from 'react-router-redux';
-import user from './testReducer';
+import syllabi from './builderReducer';
 import { firebaseReducer } from "react-redux-firebase";
 
 const rootReducer = combineReducers({
-  user,
+  syllabi,
   firebase: firebaseReducer,
   routing: routerReducer
 });
